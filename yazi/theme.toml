@@ -1,0 +1,333 @@
+# ~/.config/yazi/theme.toml
+# Thème Gruvbox complet pour Yazi
+
+# Palette de couleurs Gruvbox
+[flavor]
+use = ""
+
+# ===== MANAGER =====
+[mgr]
+cwd = { fg = "#a89984" }
+
+# Hovered (élément survolé)
+hovered = { fg = "#1d2021", bg = "#fabd2f" }
+preview_hovered = { underline = true }
+
+# Find (recherche)
+find_keyword = { fg = "#fe8019", italic = true }
+find_position = { fg = "#d3869b", bg = "reset", italic = true }
+
+# Marker (marqueurs)
+marker_selected = { fg = "#b8bb26", bg = "#b8bb26" }
+marker_copied = { fg = "#fabd2f", bg = "#fabd2f" }
+marker_cut = { fg = "#fb4934", bg = "#fb4934" }
+
+# Tab (onglets)
+tab_active = { fg = "#1d2021", bg = "#83a598" }
+tab_inactive = { fg = "#a89984", bg = "#3c3836" }
+tab_width = 1
+
+# Border (bordures)
+border_symbol = "│"
+border_style = { fg = "#665c54" }
+
+# Highlighting (mise en évidence)
+syntect_theme = ""
+
+# ===== STATUS =====
+[status]
+separator_open = ""
+separator_close = ""
+separator_style = { fg = "#3c3836", bg = "#3c3836" }
+
+# Mode normal
+mode_normal = { fg = "#1d2021", bg = "#a89984", bold = true }
+mode_select = { fg = "#1d2021", bg = "#b8bb26", bold = true }
+mode_unset = { fg = "#1d2021", bg = "#fb4934", bold = true }
+
+# Progress (barre de progression)
+progress_label = { fg = "#ebdbb2", bold = true }
+progress_normal = { fg = "#83a598", bg = "#3c3836" }
+progress_error = { fg = "#fb4934", bg = "#3c3836" }
+
+# Permissions
+permissions_t = { fg = "#b8bb26" }
+permissions_r = { fg = "#fabd2f" }
+permissions_w = { fg = "#fb4934" }
+permissions_x = { fg = "#83a598" }
+permissions_s = { fg = "#d3869b" }
+
+# ===== INPUT =====
+[input]
+border = { fg = "#83a598" }
+title = { fg = "#ebdbb2" }
+value = { fg = "#ebdbb2" }
+selected = { reversed = true }
+
+# ===== SELECT =====
+[select]
+border = { fg = "#83a598" }
+active = { fg = "#d3869b" }
+inactive = { fg = "#a89984" }
+
+# ===== TASKS =====
+[tasks]
+border = { fg = "#83a598" }
+title = { fg = "#ebdbb2" }
+hovered = { underline = true }
+
+# ===== WHICH =====
+[which]
+mask = { bg = "#1d2021" }
+cand = { fg = "#83a598" }
+rest = { fg = "#a89984" }
+desc = { fg = "#d3869b" }
+separator = "  "
+separator_style = { fg = "#504945" }
+
+# ===== HELP =====
+[help]
+on = { fg = "#d3869b" }
+exec = { fg = "#83a598" }
+desc = { fg = "#a89984" }
+hovered = { bg = "#504945", bold = true }
+footer = { fg = "#1d2021", bg = "#a89984" }
+
+# ===== FILETYPE =====
+[filetype]
+
+rules = [
+	# Images
+	{ mime = "image/*", fg = "#d3869b" },
+	
+	# Videos
+	{ mime = "video/*", fg = "#fabd2f" },
+	{ mime = "audio/*", fg = "#fabd2f" },
+	
+	# Archives
+	{ mime = "application/zip", fg = "#fb4934" },
+	{ mime = "application/gzip", fg = "#fb4934" },
+	{ mime = "application/x-tar", fg = "#fb4934" },
+	{ mime = "application/x-bzip", fg = "#fb4934" },
+	{ mime = "application/x-bzip2", fg = "#fb4934" },
+	{ mime = "application/x-7z-compressed", fg = "#fb4934" },
+	{ mime = "application/x-rar", fg = "#fb4934" },
+	
+	# Documents
+	{ mime = "application/pdf", fg = "#fb4934" },
+	{ mime = "application/msword", fg = "#83a598" },
+	{ mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fg = "#83a598" },
+	
+	# Spreadsheets
+	{ mime = "application/vnd.ms-excel", fg = "#b8bb26" },
+	{ mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fg = "#b8bb26" },
+	
+	# Code
+	{ mime = "text/x-python", fg = "#fabd2f" },
+	{ mime = "text/x-script.python", fg = "#fabd2f" },
+	{ mime = "application/javascript", fg = "#fabd2f" },
+	{ mime = "text/javascript", fg = "#fabd2f" },
+	{ mime = "text/x-java", fg = "#fb4934" },
+	{ mime = "text/x-c", fg = "#83a598" },
+	{ mime = "text/x-c++", fg = "#83a598" },
+	{ mime = "text/x-rust", fg = "#fe8019" },
+	{ mime = "text/x-go", fg = "#83a598" },
+	{ mime = "text/x-php", fg = "#d3869b" },
+	{ mime = "text/x-ruby", fg = "#fb4934" },
+	
+	# Web
+	{ mime = "text/html", fg = "#fe8019" },
+	{ mime = "text/css", fg = "#83a598" },
+	{ mime = "application/json", fg = "#fabd2f" },
+	{ mime = "application/xml", fg = "#b8bb26" },
+	{ mime = "text/xml", fg = "#b8bb26" },
+	
+	# Config files
+	{ mime = "text/x-yaml", fg = "#d3869b" },
+	{ mime = "text/x-toml", fg = "#d3869b" },
+	{ mime = "text/x-ini", fg = "#a89984" },
+	
+	# Text
+	{ mime = "text/*", fg = "#ebdbb2" },
+	
+	# Executables
+	{ mime = "application/x-executable", fg = "#b8bb26" },
+	{ mime = "application/x-sharedlib", fg = "#fb4934" },
+	
+	# System
+	{ mime = "inode/directory", fg = "#83a598" },
+	{ mime = "inode/symlink", fg = "#8ec07c" },
+]
+
+# Extension-based rules (fallback)
+# Archives
+"*.zip" = { fg = "#fb4934" }
+"*.tar" = { fg = "#fb4934" }
+"*.gz" = { fg = "#fb4934" }
+"*.bz2" = { fg = "#fb4934" }
+"*.xz" = { fg = "#fb4934" }
+"*.7z" = { fg = "#fb4934" }
+"*.rar" = { fg = "#fb4934" }
+
+# Images
+"*.jpg" = { fg = "#d3869b" }
+"*.jpeg" = { fg = "#d3869b" }
+"*.png" = { fg = "#d3869b" }
+"*.gif" = { fg = "#d3869b" }
+"*.bmp" = { fg = "#d3869b" }
+"*.ico" = { fg = "#d3869b" }
+"*.svg" = { fg = "#d3869b" }
+"*.webp" = { fg = "#d3869b" }
+
+# Videos
+"*.mp4" = { fg = "#fabd2f" }
+"*.mkv" = { fg = "#fabd2f" }
+"*.avi" = { fg = "#fabd2f" }
+"*.mov" = { fg = "#fabd2f" }
+"*.wmv" = { fg = "#fabd2f" }
+"*.flv" = { fg = "#fabd2f" }
+"*.webm" = { fg = "#fabd2f" }
+
+# Audio
+"*.mp3" = { fg = "#fabd2f" }
+"*.flac" = { fg = "#fabd2f" }
+"*.wav" = { fg = "#fabd2f" }
+"*.ogg" = { fg = "#fabd2f" }
+"*.m4a" = { fg = "#fabd2f" }
+"*.aac" = { fg = "#fabd2f" }
+
+# Documents
+"*.pdf" = { fg = "#fb4934" }
+"*.doc" = { fg = "#83a598" }
+"*.docx" = { fg = "#83a598" }
+"*.odt" = { fg = "#83a598" }
+"*.rtf" = { fg = "#83a598" }
+
+# Spreadsheets
+"*.xls" = { fg = "#b8bb26" }
+"*.xlsx" = { fg = "#b8bb26" }
+"*.ods" = { fg = "#b8bb26" }
+"*.csv" = { fg = "#b8bb26" }
+
+# Presentations
+"*.ppt" = { fg = "#fe8019" }
+"*.pptx" = { fg = "#fe8019" }
+"*.odp" = { fg = "#fe8019" }
+
+# Programming languages
+"*.py" = { fg = "#fabd2f" }
+"*.js" = { fg = "#fabd2f" }
+"*.ts" = { fg = "#fabd2f" }
+"*.jsx" = { fg = "#fabd2f" }
+"*.tsx" = { fg = "#fabd2f" }
+"*.java" = { fg = "#fb4934" }
+"*.c" = { fg = "#83a598" }
+"*.cpp" = { fg = "#83a598" }
+"*.cc" = { fg = "#83a598" }
+"*.cxx" = { fg = "#83a598" }
+"*.h" = { fg = "#83a598" }
+"*.hpp" = { fg = "#83a598" }
+"*.rs" = { fg = "#fe8019" }
+"*.go" = { fg = "#83a598" }
+"*.php" = { fg = "#d3869b" }
+"*.rb" = { fg = "#fb4934" }
+"*.pl" = { fg = "#83a598" }
+"*.sh" = { fg = "#b8bb26" }
+"*.bash" = { fg = "#b8bb26" }
+"*.zsh" = { fg = "#b8bb26" }
+"*.fish" = { fg = "#b8bb26" }
+
+# Web
+"*.html" = { fg = "#fe8019" }
+"*.htm" = { fg = "#fe8019" }
+"*.css" = { fg = "#83a598" }
+"*.scss" = { fg = "#83a598" }
+"*.sass" = { fg = "#83a598" }
+"*.less" = { fg = "#83a598" }
+
+# Data formats
+"*.json" = { fg = "#fabd2f" }
+"*.xml" = { fg = "#b8bb26" }
+"*.yaml" = { fg = "#d3869b" }
+"*.yml" = { fg = "#d3869b" }
+"*.toml" = { fg = "#d3869b" }
+"*.ini" = { fg = "#a89984" }
+"*.cfg" = { fg = "#a89984" }
+"*.conf" = { fg = "#a89984" }
+
+# Text files
+"*.txt" = { fg = "#ebdbb2" }
+"*.md" = { fg = "#ebdbb2" }
+"*.rst" = { fg = "#ebdbb2" }
+"*.org" = { fg = "#ebdbb2" }
+
+# Logs
+"*.log" = { fg = "#a89984" }
+
+# Fonts
+"*.ttf" = { fg = "#d3869b" }
+"*.otf" = { fg = "#d3869b" }
+"*.woff" = { fg = "#d3869b" }
+"*.woff2" = { fg = "#d3869b" }
+
+# System files
+"Makefile" = { fg = "#fe8019" }
+"Dockerfile" = { fg = "#83a598" }
+"README*" = { fg = "#fabd2f", bold = true }
+"LICENSE*" = { fg = "#a89984" }
+".gitignore" = { fg = "#a89984" }
+".gitmodules" = { fg = "#a89984" }
+".env" = { fg = "#fabd2f" }
+
+# Executables
+"*.exe" = { fg = "#b8bb26" }
+"*.msi" = { fg = "#b8bb26" }
+"*.deb" = { fg = "#b8bb26" }
+"*.rpm" = { fg = "#b8bb26" }
+"*.pkg" = { fg = "#b8bb26" }
+"*.dmg" = { fg = "#b8bb26" }
+"*.app" = { fg = "#b8bb26" }
+
+# Directories (special)
+"/" = { fg = "#83a598", bold = true }
+"*/" = { fg = "#83a598" }
+
+# ===== ICONS =====
+[icon]
+# Répertoires
+"Desktop/" = "🖥️"
+"Documents/" = "📄"
+"Downloads/" = "⬇️"
+"Music/" = "🎵"
+"Pictures/" = "🖼️"
+"Videos/" = "🎬"
+"Projects/" = "💻"
+".config/" = "⚙️"
+".git/" = ""
+"node_modules/" = ""
+
+# Extensions de fichiers
+"*.rs" = ""
+"*.py" = ""
+"*.js" = ""
+"*.ts" = ""
+"*.json" = ""
+"*.toml" = ""
+"*.yaml" = ""
+"*.yml" = ""
+"*.html" = ""
+"*.css" = ""
+"*.md" = ""
+"*.txt" = "📄"
+"*.pdf" = ""
+"*.zip" = ""
+"*.tar" = ""
+"*.gz" = ""
+
+# Fichiers spéciaux
+"Cargo.toml" = ""
+"package.json" = ""
+"Dockerfile" = ""
+"README.md" = ""
+"LICENSE" = ""
+".gitignore" = ""

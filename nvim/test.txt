@@ -1,0 +1,107 @@
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
+vim.opt.clipboard = "unnamedplus"
+
+require("lazy").setup({
+  spec = {
+    -- LazyVim plugins
+    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    -- Plugins supplémentaires
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.json" },
+    { import = "lazyvim.plugins.extras.ui.mini-animate" },
+    { import = "plugins" },
+
+    -- Ajout de nvim-treesitter pour la prise en charge de C
+    {
+      "nvim-treesitter/nvim-treesitter",
+      run = ":TSUpdate",
+      config = function()
+        require("nvim-treesitter.configs").setup({
+          ensure_installed = { "c", "cpp" }, -- Installer C et C++
+          highlight = {
+            enable = true, -- Activer la coloration syntaxique
+          },
+        })
+      end,
+    },
+
+    -- Plugin coc.nvim pour LSP et autocomplétion avec clangd
+    {
+      "neoclide/coc.nvim",
+      branch = "release",
+      config = function()
+        vim.g.coc_global_extensions = { "coc-clangd" } -- Extension pour C avec clangd
+      end,
+    },
+
+    -- Plugin nvim-lspconfig
+
+    {
+      "neovim/nvim-lspconfig",
+      config = function()
+        -- Configuration de lspconfig avec clangd (C/C++)
+        require("lspconfig").clangd.setup({})
+
+        -- Configuration de lspconfig pour ocamllsp (LSP pour OCaml)
+        require("lspconfig").ocamllsp.setup({
+          settings = {
+            ocamllsp = {
+              -- Activer le formatage automatique pour OCaml
+              formatting = {
+                enable = true, -- Active le formatage
+              },
+              diagnostics = {
+                enable = true,
+              },
+            },
+          },
+        })
+      end,
+    },
+    {
+      "ray-x/lsp_signature.nvim",
+      config = function()
+        require("lsp_signature").on_attach()
+      end,
+    },
+    spec = {
+      { "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = { contrast = "hard" } }, -- Assure-toi que ce plugin est ajouté
+    },
+  },
+  defaults = {
+    -- Par défaut, seuls les plugins LazyVim seront chargés à la demande. Tes plugins personnalisés seront chargés au démarrage.
+    lazy = false,
+    version = false, -- Toujours utiliser la dernière version du commit git
+  },
+  install = { colorscheme = { "tokyonight", "habamax" } },
+  checker = {
+    enabled = true, -- Vérification périodique des mises à jour des plugins
+    notify = false, -- Ne pas notifier lors des mises à jour
+  },
+  performance = {
+    rtp = {
+      -- Désactiver certains plugins de rtp
+      disabled_plugins = {
+        "gzip",
+        "tarPlugin",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
+})

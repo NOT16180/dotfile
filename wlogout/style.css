@@ -1,0 +1,81 @@
+window {
+  font-family: Terminus, monospace;
+  font-size: 16pt;
+  color: #ebdbb2;
+  /* text */
+  background-color: rgba(40, 40, 40, 0.76);
+}
+
+button {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 15%;
+  /* réduit de 10% à 8% */
+  border-style: solid;
+  border-radius: 0px;
+  border-width: 2px;
+  border-color: #ebdbb2;
+  background-color: rgba(40, 40, 40, 0.76);
+
+  margin: 2px;
+  /* réduit de 5px à 2px */
+  padding: 4px 10px;
+  /* ajoute un padding plus petit */
+
+  font-size: 0.85em;
+  /* réduit la taille du texte */
+
+  transition:
+    box-shadow 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
+  min-width: 60px;
+  /* optionnel : largeur minimale réduite */
+  min-height: 28px;
+  /* optionnel : hauteur minimale réduite */
+}
+
+button:hover {
+  background-color: rgba(104, 157, 106, 0.92);
+  color: #282828;
+}
+
+button:focus {
+  background-color: #ebdbb2;
+  color: #282828;
+}
+
+#lock {
+  background-image: image(url("./lock.png"));
+}
+
+#lock:focus {
+  background-image: image(url("./lock-hover.png"));
+}
+
+#lock:hover {
+  background-image: image(url("./lock-hover.png"));
+}
+
+#shutdown {
+  background-image: image(url("./power.png"));
+}
+
+#shutdown:focus {
+  background-image: image(url("./power-hover.png"));
+}
+
+#shutdown:hover {
+  background-image: image(url("./power-hover.png"));
+}
+
+#reboot {
+  background-image: image(url("./restart.png"));
+}
+
+#reboot:focus {
+  background-image: image(url("./restart-hover.png"));
+}
+
+#reboot:hover {
+  background-image: image(url("./restart-hover.png"));
+}

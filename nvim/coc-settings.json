@@ -1,0 +1,6 @@
+{
+  "cSpellExt.enableDictionaries": ["french", "english"],
+  "cSpell.language": "fr,en",
+  "cSpell.checkWordsInComments": true,
+  "cSpell.checkWordsInStrings": true
+}

@@ -1,0 +1,18 @@
+    {
+        "label": "lock",
+        "action": "hyprlock",
+        "text": "  Lock (main shift F)  ",
+        "keybind": "main shift F"
+    },
+    {
+        "label": "reboot",
+        "action": "systemctl reboot",
+        "text": " Reboot (r) ",
+        "keybind": "r"
+    },
+    {
+        "label": "shutdown",
+        "action": "systemctl poweroff",
+        "text": " Shutdown (s) ",
+        "keybind": "s"
+    }

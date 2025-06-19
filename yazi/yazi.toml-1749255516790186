@@ -1,0 +1,177 @@
+# Configuration Yazi pour ouvrir les fichiers avec Neovim
+# Placez ce fichier dans ~/.config/yazi/yazi.toml
+
+[manager]
+# Ratio des colonnes [parent, current, preview]
+ratio = [1, 4, 3]
+# Tri par défaut
+sort_by = "alphabetical"
+sort_sensitive = false
+sort_reverse = false
+sort_dir_first = true
+linemode = "none"
+show_hidden = false
+show_symlink = true
+
+[preview]
+# Taille limite pour la prévisualisation
+tab_size = 2
+max_width = 600
+max_height = 900
+cache_dir = ""
+
+[opener]
+# Configuration des applications pour ouvrir les fichiers
+
+# Éditeur de texte par défaut - Neovim
+edit = [
+    { run = 'nvim "$@"', desc = "Edit with Neovim", block = true },
+]
+
+# Ouvrir avec l'éditeur par défaut (Neovim)
+open = [
+    { run = 'nvim "$@"', desc = "Open with Neovim", block = true },
+]
+
+# Pour les fichiers texte spécifiquement
+text = [
+    { run = 'nvim "$@"', desc = "Edit with Neovim", block = true },
+]
+
+# Pour les fichiers de code
+code = [
+    { run = 'nvim "$@"', desc = "Edit with Neovim", block = true },
+]
+
+# Images (optionnel - vous pouvez garder un visualiseur d'images)
+image = [
+    { run = 'feh "$@"', desc = "View with feh" },
+    { run = 'nvim "$@"', desc = "Edit with Neovim", block = true },
+]
+
+# Vidéos (optionnel)
+video = [
+    { run = 'mpv "$@"', desc = "Play with mpv" },
+]
+
+# Audio (optionnel)
+audio = [
+    { run = 'mpv "$@"', desc = "Play with mpv" },
+]
+
+# Archives (optionnel)
+archive = [
+    { run = 'aunpack "$@"', desc = "Extract here" },
+]
+
+# PDFs (optionnel)
+pdf = [
+    { run = 'zathura "$@"', desc = "View with Zathura" },
+    { run = 'nvim "$@"', desc = "Edit with Neovim", block = true },
+]
+
+[open]
+# Règles d'association par type MIME et extension
+
+# Fichiers texte
+rules = [
+    # Tous les fichiers texte avec Neovim
+    { mime = "text/*", use = "edit" },
+    
+    # Fichiers de configuration
+    { name = "*.conf", use = "edit" },
+    { name = "*.ini", use = "edit" },
+    { name = "*.cfg", use = "edit" },
+    { name = "*.toml", use = "edit" },
+    { name = "*.yaml", use = "edit" },
+    { name = "*.yml", use = "edit" },
+    { name = "*.json", use = "edit" },
+    { name = "*.xml", use = "edit" },
+    
+    # Fichiers de programmation
+    { name = "*.py", use = "edit" },
+    { name = "*.js", use = "edit" },
+    { name = "*.ts", use = "edit" },
+    { name = "*.rs", use = "edit" },
+    { name = "*.go", use = "edit" },
+    { name = "*.c", use = "edit" },
+    { name = "*.cpp", use = "edit" },
+    { name = "*.h", use = "edit" },
+    { name = "*.hpp", use = "edit" },
+    { name = "*.java", use = "edit" },
+    { name = "*.rb", use = "edit" },
+    { name = "*.php", use = "edit" },
+    { name = "*.lua", use = "edit" },
+    { name = "*.vim", use = "edit" },
+    { name = "*.sh", use = "edit" },
+    { name = "*.bash", use = "edit" },
+    { name = "*.zsh", use = "edit" },
+    { name = "*.fish", use = "edit" },
+    
+    # Web
+    { name = "*.html", use = "edit" },
+    { name = "*.css", use = "edit" },
+    { name = "*.scss", use = "edit" },
+    { name = "*.sass", use = "edit" },
+    
+    # Markdown et documentation
+    { name = "*.md", use = "edit" },
+    { name = "*.rst", use = "edit" },
+    { name = "*.txt", use = "edit" },
+    
+    # Logs
+    { name = "*.log", use = "edit" },
+    
+    # Fichiers sans extension (souvent des fichiers de config)
+    { name = "Dockerfile", use = "edit" },
+    { name = "Makefile", use = "edit" },
+    { name = "README", use = "edit" },
+    { name = "LICENSE", use = "edit" },
+    { name = "CHANGELOG", use = "edit" },
+    
+    # Images (optionnel - garde feh pour les images)
+    { mime = "image/*", use = "image" },
+    
+    # Vidéos
+    { mime = "video/*", use = "video" },
+    
+    # Audio
+    { mime = "audio/*", use = "audio" },
+    
+    # Archives
+    { mime = "application/zip", use = "archive" },
+    { mime = "application/gzip", use = "archive" },
+    { mime = "application/x-tar", use = "archive" },
+    { mime = "application/x-bzip2", use = "archive" },
+    { mime = "application/x-7z-compressed", use = "archive" },
+    
+    # PDFs
+    { mime = "application/pdf", use = "pdf" },
+    
+    # Fallback - ouvre tout le reste avec Neovim
+    { name = "*", use = "edit" },
+]
+
+[tasks]
+# Configuration des tâches
+micro_workers = 10
+macro_workers = 25
+bizarre_retry = 5
+image_alloc = 536870912  # 512MB
+image_bound = [0, 0]
+suppress_preload = false
+
+[plugin]
+# Plugins disponibles
+prepend_preloaders = []
+append_preloaders = []
+prepend_previewers = []
+append_previewers = []
+
+[input]
+# Configuration de la saisie
+cursor_blink = false
+
+[log]
+# Configuration des logs
+enabled = false

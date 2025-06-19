@@ -1,0 +1,175 @@
+# Configuration Yazi avec thème Gruvbox
+# Placez ce fichier dans ~/.config/yazi/theme.toml
+
+[manager]
+cwd = { fg = "#fabd2f" }
+
+# Selection
+hovered         = { fg = "#282828", bg = "#fabd2f" }
+preview_hovered = { underline = true }
+
+# Find
+find_keyword  = { fg = "#b8bb26", italic = true }
+find_position = { fg = "#fe8019", bg = "reset", italic = true }
+
+# Marker
+marker_selected = { fg = "#b8bb26", bg = "#b8bb26" }
+marker_copied   = { fg = "#fabd2f", bg = "#fabd2f" }
+marker_cut      = { fg = "#fb4934", bg = "#fb4934" }
+
+# Tab
+tab_active   = { fg = "#282828", bg = "#83a598" }
+tab_inactive = { fg = "#a89984", bg = "#3c3836" }
+tab_width    = 1
+
+# Border
+border_symbol = "│"
+border_style  = { fg = "#665c54" }
+
+# Highlighting
+syntect_theme = "~/.config/yazi/Gruvbox-Dark.tmTheme"
+
+[status]
+separator_open  = ""
+separator_close = ""
+separator_style = { fg = "#3c3836", bg = "#3c3836" }
+
+# Mode
+mode_normal = { fg = "#282828", bg = "#a89984", bold = true }
+mode_select = { fg = "#282828", bg = "#b8bb26", bold = true }
+mode_unset  = { fg = "#282828", bg = "#fb4934", bold = true }
+
+# Progress
+progress_label  = { bold = true }
+progress_normal = { fg = "#83a598", bg = "#3c3836" }
+progress_error  = { fg = "#fb4934", bg = "#3c3836" }
+
+# Permissions
+permissions_t = { fg = "#b8bb26" }
+permissions_r = { fg = "#fabd2f" }
+permissions_w = { fg = "#fb4934" }
+permissions_x = { fg = "#83a598" }
+permissions_s = { fg = "#d3869b" }
+
+[select]
+border   = { fg = "#83a598" }
+active   = { fg = "#fe8019" }
+inactive = { fg = "#a89984" }
+
+# Icons
+[filetype]
+
+rules = [
+	# Images
+	{ mime = "image/*", fg = "#d3869b" },
+	
+	# Videos
+	{ mime = "video/*", fg = "#fabd2f" },
+	{ mime = "audio/*", fg = "#fabd2f" },
+	
+	# Archives
+	{ mime = "application/zip",             fg = "#fb4934" },
+	{ mime = "application/gzip",           fg = "#fb4934" },
+	{ mime = "application/x-tar",          fg = "#fb4934" },
+	{ mime = "application/x-bzip",         fg = "#fb4934" },
+	{ mime = "application/x-bzip2",        fg = "#fb4934" },
+	{ mime = "application/x-7z-compressed", fg = "#fb4934" },
+	{ mime = "application/x-rar",          fg = "#fb4934" },
+	
+	# Documents
+	{ mime = "application/pdf", fg = "#fb4934" },
+	
+	# Text
+	{ mime = "text/*", fg = "#b8bb26" },
+	
+	# Programming
+	{ name = "*.py",  fg = "#fabd2f" },
+	{ name = "*.js",  fg = "#fabd2f" },
+	{ name = "*.ts",  fg = "#83a598" },
+	{ name = "*.rs",  fg = "#fe8019" },
+	{ name = "*.go",  fg = "#83a598" },
+	{ name = "*.c",   fg = "#83a598" },
+	{ name = "*.cpp", fg = "#83a598" },
+	{ name = "*.h",   fg = "#83a598" },
+	{ name = "*.hpp", fg = "#83a598" },
+	{ name = "*.java", fg = "#fe8019" },
+	{ name = "*.rb",  fg = "#fb4934" },
+	{ name = "*.php", fg = "#d3869b" },
+	
+	# Web
+	{ name = "*.html", fg = "#fe8019" },
+	{ name = "*.css",  fg = "#83a598" },
+	{ name = "*.scss", fg = "#d3869b" },
+	{ name = "*.sass", fg = "#d3869b" },
+	
+	# Config
+	{ name = "*.json", fg = "#fabd2f" },
+	{ name = "*.yaml", fg = "#fb4934" },
+	{ name = "*.yml",  fg = "#fb4934" },
+	{ name = "*.toml", fg = "#fe8019" },
+	{ name = "*.xml",  fg = "#fe8019" },
+	
+	# Logs
+	{ name = "*.log", fg = "#a89984" },
+	
+	# Executables
+	{ name = "*.sh",  fg = "#b8bb26" },
+	{ name = "*.bash", fg = "#b8bb26" },
+	{ name = "*.zsh", fg = "#b8bb26" },
+	{ name = "*.fish", fg = "#b8bb26" },
+	
+	# Special files
+	{ name = "*", is = "exec", fg = "#b8bb26" },
+	{ name = "*", is = "link", fg = "#8ec07c" },
+]
+
+[input]
+border   = { fg = "#83a598" }
+title    = { fg = "#fabd2f" }
+value    = { fg = "#ebdbb2" }
+selected = { reversed = true }
+
+[completion]
+border   = { fg = "#83a598" }
+active   = { bg = "#3c3836" }
+inactive = { fg = "#a89984" }
+
+[tasks]
+border  = { fg = "#83a598" }
+title   = { fg = "#fabd2f" }
+hovered = { underline = true }
+
+[which]
+mask            = { bg = "#282828" }
+cand            = { fg = "#8ec07c" }
+rest            = { fg = "#a89984" }
+desc            = { fg = "#fe8019" }
+separator       = "  "
+separator_style = { fg = "#665c54" }
+
+[help]
+on      = { fg = "#d3869b" }
+exec    = { fg = "#8ec07c" }
+desc    = { fg = "#a89984" }
+hovered = { bg = "#3c3836", bold = true }
+footer  = { fg = "#282828", bg = "#a89984" }
+
+[notify]
+title_info  = { fg = "#b8bb26" }
+title_warn  = { fg = "#fabd2f" }
+title_error = { fg = "#fb4934" }
+
+# Couleurs Gruvbox utilisées :
+# bg0: #282828      (arrière-plan principal)
+# bg1: #3c3836      (arrière-plan secondaire)
+# bg2: #504945      (arrière-plan tertiaire)
+# fg0: #fbf1c7      (premier plan principal)
+# fg1: #ebdbb2      (premier plan secondaire)
+# gray: #928374     (gris)
+# red: #fb4934      (rouge)
+# green: #b8bb26    (vert)
+# yellow: #fabd2f   (jaune)
+# blue: #83a598     (bleu)
+# purple: #d3869b   (violet)
+# aqua: #8ec07c     (cyan)
+# orange: #fe8019   (orange)

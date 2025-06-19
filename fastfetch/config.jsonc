@@ -1,0 +1,106 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "source": "/home/not/Pictures/notpic_gruvbox-Dark_mode-Light_mode.png",
+    "type": "kitty",
+    "height": 16,
+    "padding": {
+      "top": 5,
+      "left": 3,
+    },
+  },
+  "display": {
+    "separator": " NOT ",
+  },
+  "modules": [
+    "break",
+    "break",
+    "break",
+    "break",
+
+    {
+      "type": "kernel",
+      "key": "  ",
+      "keyColor": "1",
+    },
+    {
+      "type": "packages",
+      "format": "{} (pacman)",
+      "key": " 󰏖 ",
+      "keyColor": "1",
+    },
+    {
+      "type": "shell",
+      "key": "  ",
+      "keyColor": "1",
+    },
+    "break",
+
+    {
+      "type": "wmtheme",
+      "key": " 󰉼 ",
+      "keyColor": "1",
+    },
+    {
+      "type": "icons",
+      "key": " 󰀻 ",
+      "keyColor": "1",
+    },
+    {
+      "type": "cursor",
+      "key": "  ",
+      "keyColor": "1",
+    },
+    {
+      "type": "terminal",
+      "key": "  ",
+      "keyColor": "1",
+    },
+    {
+      "type": "terminalfont",
+      "key": "  ",
+      "keyColor": "1",
+    },
+    "break",
+
+    {
+      "type": "cpu",
+      "format": "{1} ({3}) @ {7} GHz",
+      "key": "  ",
+      "keyColor": "1",
+    },
+    {
+      "type": "gpu",
+      "format": "{1} {2} @ {12} GHz",
+      "key": " 󰢮 ",
+      "keyColor": "1",
+    },
+
+    {
+      "type": "disk",
+      "key": " 󰋊 ",
+      "keyColor": "1",
+    },
+    {
+      "type": "monitor",
+      "key": "  ",
+      "keyColor": "1",
+    },
+
+    "break",
+
+    {
+      "type": "uptime",
+      "key": "  ",
+      "keyColor": "33",
+    },
+    {
+      "type": "media",
+      "key": " 󰝚 ",
+      "keyColor": "33",
+    },
+
+    "break",
+    "break",
+  ],
+}
