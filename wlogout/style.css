@@ -19,7 +19,7 @@ button {
 
   margin: 2px;
   /* réduit de 5px à 2px */
-  padding: 4px 10px;
+  padding: 2px 6px;
   /* ajoute un padding plus petit */
 
   font-size: 0.85em;
@@ -28,10 +28,9 @@ button {
   transition:
     box-shadow 0.3s ease-in-out,
     background-color 0.3s ease-in-out;
-  min-width: 60px;
-  /* optionnel : largeur minimale réduite */
-  min-height: 28px;
-  /* optionnel : hauteur minimale réduite */
+  min-width: unset;
+  min-height: unset;
+
 }
 
 button:hover {

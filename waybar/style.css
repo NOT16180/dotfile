@@ -67,6 +67,7 @@
 #window,
 #custom-playerctl,
 #custom-firefoxctl,
+#custom-chromiumctl,
 #custom-spotify-player,
 #clock,
 #calendarr,
@@ -188,6 +189,18 @@
 
   color: #ebdbb2;
 }
+
+#custom-chromiumctl {
+  background: rgba(40, 40, 40, 0.76);
+  border-width: 2px;
+  border-style: solid;
+  border-color: #ebdbb2;
+  border-right: 0px;
+  border-left: 0px;
+
+  color: #ebdbb2;
+}
+
 
 #custom-spotify-player {
   background: rgba(40, 40, 40, 0.76);
