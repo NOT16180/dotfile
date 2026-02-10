@@ -1,0 +1,3 @@
+gtk theme : https://gitlab.com/dejan-z/xfce-stuff/-/blob/main/Dodge/Dodge.tar.gz
+
+icon theme : https://github.com/SethStormR/Delight-2
