@@ -107,6 +107,7 @@ plugins=(
     zsh-autosuggestions
     zsh-history-substring-search
     zsh-syntax-highlighting
+	zsh-completions  # pour plus de complétions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -169,6 +170,9 @@ eval $(opam env)
 #
 alias swap="find . -name '*.swp' -exec rm -f {} \+"
 alias performance='sudo cpupower frequency-set -g performance'
+alias schedutil='sudo cpupower frequency-set -g schedutil'
+alias powersave='sudo cpupower frequency-set -g powersave'
+alias cpumode='cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor'
 alias conf='cd ~/.config'
 alias cc='gcc -Wall'
 alias ok='exit'
@@ -177,13 +181,74 @@ alias ya='yazi'
 alias cl='clear'
 alias conf='cd /home/not/.config/'
 alias zshconf='nv ~/.zshrc'
+alias cours='cd /home/not/repos/git_perso/cours'
+alias l3='cd /home/not/repos/git_perso/cours'
 
-ffx() {
-  query=$(printf "%s+" "$@" | sed 's/+$//')
-  firefox "https://www.google.com/search?q=${query}"
+
+search() {
+  local query="$*"
+  nohup chromium "https://www.google.com/search?q=${(j:+:)query}" >/dev/null 2>&1 &
 }
+
 inprnt() {
   magick "$1" +profile "icc,*" -resize 4000 -units PixelsPerInch -density 300 "$2"
 }
 
 source /usr/share/nvm/init-nvm.sh
+export PATH="$HOME/.cargo/bin:$PATH"
+
+
+#performance
+ 
+# =============================================
+# PERFORMANCE AMD - GAMING OPTIMIZATIONS
+# =============================================
+
+# Driver Vulkan AMD optimisé
+export RADV_PERFTEST=gpl,rt
+export ACO_DEBUG=novn
+export AMD_VULKAN_ICD=RADV
+
+# DXVK & Proton gaming
+export DXVK_ASYNC=1
+export PROTON_ENABLE_NVAPI=1
+export PROTON_USE_WINED3D=0
+export WINE_FULLSCREEN_FSR=1
+export WINE_FULLSCREEN_FSR_STRENGTH=2
+
+# MESA & OpenGL optimisations
+export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
+export gallium_drv=radeonsi
+
+# Désactiver VSYNC pour plus de FPS
+export vblank_mode=0
+export __GL_SYNC_TO_VBLANK=0
+
+# GameMode pour optimisation auto
+export SDL_GAMECONTROLLERCONFIG_FILE="$HOME/.config/sdl_gamecontrollerdb.txt"
+
+# =============================================
+# PERFORMANCE GÉNÉRALE - BUREAUTIQUE
+# =============================================
+
+# Optimisations système générales
+export __GL_SHADER_DISK_CACHE=1
+export __GL_SHADER_DISK_CACHE_PATH="$HOME/.cache/nvidia"
+export mesa_glthread=true
+
+# Performance applications
+export OBS_VKCAPTURE=1  # OBS performance
+export QT_QPA_PLATFORM=wayland  # Applications Qt
+
+
+
+
+
+
+
+# =============================================
+# VARIABLES DE SÉCURITÉ (optionnel)
+# =============================================
+
+# Désactiver DXVK_HUD en prod (l'activer seulement pour debug)
+# export DXVK_HUD=compiler

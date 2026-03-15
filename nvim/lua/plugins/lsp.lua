@@ -12,12 +12,18 @@ return {
             ensure_installed = {
                 "clangd", -- C/C++
                 "ocamllsp", -- OCaml
-                "html", -- HTML
-                "cssls", -- CSS
+                "html-lsp", -- HTML
+                "css-lsp", -- CSS
                 "jdtls", -- Java
-                "ts_ls", -- JavaScript / TypeScript (anciennement tsserver)
-                "pyright", -- Python (serveur LSP principal)
-                -- rust_analyzer géré par rustaceanvim
+                "typescript-language-server", -- JavaScript/TypeScript
+                "eslint_d", -- Linting JS/TS (plus rapide qu'eslint)
+                "pyright", -- Python
+                "bash-language-server", -- Bash
+                "lua-language-server", -- Lua
+                "marksman", -- Markdown
+                "harper-ls", -- Correcteur orthographique
+                "yaml-language-server", -- YAML
+                "json-lsp", -- JSON
             },
         },
     },
@@ -27,19 +33,31 @@ return {
             "mfussenegger/nvim-jdtls", -- Plugin spécialisé pour Java
         },
         config = function()
-            local servers = { "clangd", "ocamllsp", "html", "cssls", "ts_ls", "pyright" }
+            local servers = {
+                "clangd",
+                "ocamllsp",
+                "html",
+                "cssls",
+                "ts_ls",
+                "eslint",
+                "pyright",
+                "bashls",
+                "lua_ls",
+                "marksman",
+                "harper_ls",
+                "yamlls",
+                "jsonls",
+            }
             local lspconfig = require("lspconfig")
 
             -- Fonction pour obtenir les capacités LSP
             local function get_capabilities()
                 local capabilities = vim.lsp.protocol.make_client_capabilities()
-
                 -- Si blink.cmp est disponible, utilise ses capacités
                 local has_blink, blink = pcall(require, "blink.cmp")
                 if has_blink then
                     capabilities = blink.get_lsp_capabilities(capabilities)
                 end
-
                 return capabilities
             end
 
@@ -47,7 +65,6 @@ return {
             local on_attach = function(client, bufnr)
                 -- Désactiver le formatage LSP (conform.nvim s'en charge)
                 client.server_capabilities.documentFormattingProvider = false
-
                 -- Activer l'auto-indentation
                 vim.bo[bufnr].autoindent = true
                 vim.bo[bufnr].smartindent = true
@@ -64,11 +81,90 @@ return {
                         settings = {
                             python = {
                                 analysis = {
-                                    typeCheckingMode = "basic", -- ou "strict" pour plus de vérifications
+                                    typeCheckingMode = "basic",
                                     autoSearchPaths = true,
                                     diagnosticMode = "workspace",
                                     useLibraryCodeForTypes = true,
                                     autoImportCompletions = true,
+                                },
+                            },
+                        },
+                    })
+                elseif server == "ts_ls" then
+                    -- Configuration spécifique pour JavaScript/TypeScript
+                    lspconfig[server].setup({
+                        on_attach = on_attach,
+                        capabilities = get_capabilities(),
+                        filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+                        settings = {
+                            typescript = {
+                                inlayHints = {
+                                    includeInlayParameterNameHints = "all",
+                                    includeInlayFunctionParameterTypeHints = true,
+                                },
+                            },
+                            javascript = {
+                                inlayHints = {
+                                    includeInlayParameterNameHints = "all",
+                                    includeInlayFunctionParameterTypeHints = true,
+                                },
+                            },
+                        },
+                    })
+                elseif server == "eslint" then
+                    -- Configuration spécifique pour ESLint
+                    lspconfig[server].setup({
+                        on_attach = function(client, bufnr)
+                            on_attach(client, bufnr)
+                            -- Auto-fix ESLint on save
+                            vim.api.nvim_create_autocmd("BufWritePre", {
+                                buffer = bufnr,
+                                command = "EslintFixAll",
+                            })
+                        end,
+                        capabilities = get_capabilities(),
+                    })
+                elseif server == "lua_ls" then
+                    -- Configuration spécifique pour Lua
+                    lspconfig[server].setup({
+                        on_attach = on_attach,
+                        capabilities = get_capabilities(),
+                        settings = {
+                            Lua = {
+                                runtime = {
+                                    version = "LuaJIT",
+                                },
+                                diagnostics = {
+                                    globals = { "vim" }, -- Reconnaît 'vim' comme global
+                                },
+                                workspace = {
+                                    library = vim.api.nvim_get_runtime_file("", true),
+                                    checkThirdParty = false,
+                                },
+                                telemetry = {
+                                    enable = false,
+                                },
+                            },
+                        },
+                    })
+                elseif server == "harper_ls" then
+                    -- Configuration pour Harper (correcteur orthographique)
+                    lspconfig[server].setup({
+                        on_attach = on_attach,
+                        capabilities = get_capabilities(),
+                        settings = {
+                            ["harper-ls"] = {
+                                linters = {
+                                    spell_check = true,
+                                    spelled_numbers = false,
+                                    an_a = true,
+                                    sentence_capitalization = true,
+                                    unclosed_quotes = true,
+                                    wrong_quotes = false,
+                                    long_sentences = true,
+                                    repeated_words = true,
+                                    spaces = true,
+                                    matcher = true,
                                 },
                             },
                         },
@@ -187,7 +283,6 @@ return {
                             bundles = {},
                         },
                     }
-
                     jdtls.start_or_attach(config)
                 end,
             })
@@ -219,6 +314,8 @@ return {
                 "java",
                 "javascript",
                 "typescript",
+                "tsx",
+                "json",
                 "rust",
                 "python",
                 "lua",
@@ -227,31 +324,27 @@ return {
                 "query",
                 "markdown",
                 "markdown_inline",
-                "json",
                 "yaml",
+                "bash",
             },
             sync_install = false,
             auto_install = true,
-
             highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = false,
             },
-
             indent = {
                 enable = true,
             },
-
             incremental_selection = {
                 enable = true,
                 keymaps = {
-                    init_selection = "<C-space>",
-                    node_incremental = "<C-space>",
+                    init_selection = "<CR>",
+                    node_incremental = "<CR>",
                     scope_incremental = false,
-                    node_decremental = "<bs>",
+                    node_decremental = "<BS>",
                 },
             },
-
             textobjects = {
                 select = {
                     enable = true,
@@ -289,6 +382,25 @@ return {
         },
     },
 
+    -- Support pour Yacc et Lex (détection de fichiers uniquement)
+    {
+        "nvim-lua/plenary.nvim",
+        lazy = false,
+        config = function()
+            -- Configuration de la détection des filetypes pour Yacc et Lex
+            vim.filetype.add({
+                extension = {
+                    l = "lex",
+                    y = "yacc",
+                    lex = "lex",
+                    flex = "lex",
+                    yacc = "yacc",
+                    bison = "yacc",
+                },
+            })
+        end,
+    },
+
     -- Plugins spécialisés pour Python
     {
         "linux-cultist/venv-selector.nvim",
@@ -296,20 +408,22 @@ return {
             "neovim/nvim-lspconfig",
             "mfussenegger/nvim-dap",
             "mfussenegger/nvim-dap-python",
-            { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+            {
+                "nvim-telescope/telescope.nvim",
+                branch = "0.1.x",
+                dependencies = { "nvim-lua/plenary.nvim" },
+            },
         },
         lazy = false,
         config = function()
-            require("venv-selector").setup({
-                -- Add empty table or your options here
-            })
+            require("venv-selector").setup({})
         end,
         keys = {
             { ",v", "<cmd>VenvSelect<cr>" },
         },
     },
 
-    -- Plugin pour le debugging Python (optionnel)
+    -- Plugin pour le debugging Python
     {
         "mfussenegger/nvim-dap-python",
         ft = "python",
@@ -320,42 +434,6 @@ return {
         config = function()
             local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
             require("dap-python").setup(path)
-        end,
-    },
-
-    -- Plugin pour l'auto-formatage avec conform.nvim
-    {
-        "stevearc/conform.nvim",
-        event = { "BufWritePre" },
-        cmd = { "ConformInfo" },
-        keys = {
-            {
-                "<leader>f",
-                function()
-                    require("conform").format({ async = true, lsp_fallback = true })
-                end,
-                mode = "",
-                desc = "Format buffer",
-            },
-        },
-        opts = {
-            formatters_by_ft = {
-                python = { "isort", "black" }, -- isort pour les imports, black pour le formatage général
-                javascript = { "prettier" },
-                typescript = { "prettier" },
-                html = { "prettier" },
-                css = { "prettier" },
-                json = { "prettier" },
-                yaml = { "prettier" },
-                -- java = { "google-java-format" }, -- Optionnel : décommenter si vous voulez formater Java
-            },
-            format_on_save = {
-                timeout_ms = 500,
-                lsp_fallback = true,
-            },
-        },
-        init = function()
-            vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
         end,
     },
 

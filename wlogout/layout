@@ -5,15 +5,32 @@
     "keybind": "main shift F"
 },
 {
+    "label": "logout",
+    "action": "hyprctl dispatch exit",
+    "text": " Logout (l) ",
+    "keybind": "l"
+},
+{
+    "label": "suspend",
+    "action": "systemctl suspend",
+    "text": " Suspend (u) ",
+    "keybind": "u"
+},
+{
+    "label": "hibernate",
+    "action": "systemctl hibernate",
+    "text": " Hibernate (h) ",
+    "keybind": "h"
+},
+{
     "label": "shutdown",
-    "action": "systemctl poweroff'",
+    "action": "systemctl poweroff",
     "text": " Shutdown (s) ",
     "keybind": "s"
 },
 {
     "label": "reboot",
     "action": "reboot",
-    "text": " reboot ",
+    "text": " Reboot (r) ",
     "keybind": "r"
-},
-
+}
